@@ -1,65 +1,72 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import HomeLayout from "@/components/HomeLayout";
+import { useRouter } from "next/navigation";
+import ProtectedLayout from "./protected/layout"
+
+
+export default function HomePage() {
+  const router = useRouter();
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    
+    <HomeLayout>
+      {/* Title */}
+      <h1 className="text-center text-2xl font-semibold text-slate-900 mb-8">
+        Ancient Indian History MCQ
+      </h1>
+
+      {/* Top stats card */}
+      <section className="mx-auto max-w-3xl bg-slate-900 text-white rounded-lg p-6 flex flex-col gap-4">
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <p className="text-xs uppercase tracking-wide text-slate-300">
+              Total MCQ&apos;
+            </p>
+            <p className="text-3xl font-bold mt-1">10</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-slate-300">
+              Total marks
+            </p>
+            <p className="text-3xl font-bold mt-1">10</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-slate-300">
+              Total time
+            </p>
+            <p className="text-3xl font-bold mt-1">10:00</p>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Instructions */}
+      <section className="mx-auto max-w-3xl mt-6 bg-white rounded-lg p-6 shadow-sm">
+        <h2 className="font-semibold mb-3 text-slate-900">Instructions:</h2>
+        <ol className="list-decimal list-inside space-y-1 text-sm text-slate-700">
+          <li>You have 10 minutes to complete the test.</li>
+          <li>Test consists of 10 multiple-choice Q&apos;s.</li>
+          <li>You are allowed 2 retest attempts if you do not pass on the first try.</li>
+          <li>Each incorrect answer will incur a negative mark of -1/4.</li>
+          <li>Ensure you are in a quiet environment and have a stable internet connection.</li>
+          <li>Keep an eye on the timer, and try to answer all questions within the given time.</li>
+          <li>Do not use any external resources such as dictionaries, websites, or assistance.</li>
+          <li>Complete the test honestly to accurately assess your proficiency level.</li>
+          <li>Check answers before submitting.</li>
+          <li>
+            Your test results will be displayed immediately after submission, indicating whether
+            you have passed or need to retake the test.
+          </li>
+        </ol>
+
+        <div className="mt-6 flex justify-center">
+          <button
+      className="px-8 py-2 rounded-md bg-slate-900 text-white font-medium hover:bg-slate-800 cursor-pointer"
+      onClick={() => router.push("/exam")}
+    >
+      Start Test
+    </button>
         </div>
-      </main>
-    </div>
+      </section>
+    </HomeLayout>
   );
 }
