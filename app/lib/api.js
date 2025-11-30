@@ -23,7 +23,6 @@ export const getHeaders = () => {
   };
 };
 
-// POST x-www-form-urlencoded (for most auth APIs)
 export const apiPostForm = async (endpoint, body) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -40,7 +39,6 @@ export const apiPostForm = async (endpoint, body) => {
   }
 };
 
-// GET with Authorization header
 export const apiGet = async (endpoint) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -52,6 +50,26 @@ export const apiGet = async (endpoint) => {
     return data;
   } catch (error) {
     console.error("API GET request failed:", error);
+    throw error;
+  }
+};
+
+
+
+export const apiPostsignup = async (endpoint, formData) => {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: {
+        Authorization: getHeaders().Authorization,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("API POST Multipart request failed:", error);
     throw error;
   }
 };

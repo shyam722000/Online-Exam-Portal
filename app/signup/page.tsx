@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import loginIllustration from "@/public/login-1.png";
 import loginBG from "@/public/login-bg.png";
 import logo from "@/public/logo.png";
-import { BASE_URL } from "../lib/api"; // we only need BASE_URL here
+import { apiPostsignup } from "../lib/api"; // ✅ new helper for FormData
 
 export default function SignupPage() {
   const router = useRouter();
@@ -77,14 +77,10 @@ export default function SignupPage() {
       formData.append("qualification", qualification.trim());
       formData.append("profile_image", profileFile);
 
-      const response = await fetch(`${BASE_URL}/auth/create-profile`, {
-        method: "POST",
-        body: formData,
-      });
+      // ✅ Use multipart helper (handles FormData + auth)
+      const res = await apiPostsignup("/auth/create-profile", formData);
 
-      const res = await response.json();
-
-      if (!response.ok || !res?.success) {
+      if (!res?.success) {
         setError(res?.message || "Registration failed. Please try again.");
         return;
       }
@@ -96,8 +92,11 @@ export default function SignupPage() {
       if (res.refresh_token) {
         localStorage.setItem("refresh_token", res.refresh_token);
       }
+      if (res.user?.name) {
+  localStorage.setItem("user_name", res.user.name);
+}
 
-      // redirect to home page
+
       router.push("/");
     } catch (err) {
       console.error(err);
@@ -109,7 +108,6 @@ export default function SignupPage() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
-      {/* Background */}
       <Image
         src={loginBG}
         alt="Background"
@@ -121,13 +119,11 @@ export default function SignupPage() {
 
       {/* Main Card */}
       <div className="relative z-10 w-full max-w-3xl mx-auto">
-        <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-2 sm:p-3">
-          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-3 items-center">
-            {/* LEFT — Illustration Section (same style as login) */}
-            <div className="hidden md:flex rounded-2xl md:rounded-l-2xl md:rounded-r-none px-5 lg:px-6 py-5 lg:py-6 flex-col">
-              {/* Logo - centered */}
-              <div className="flex justify-center items-center mb-4">
-                <div className="relative w-36 h-12 lg:w-44 lg:h-14">
+        <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-1 sm:p-2">
+          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-2 items-center">
+            <div className="hidden md:flex rounded-2xl md:rounded-l-2xl md:rounded-r-none px-4 lg:px-5 py-3 lg:py-4 flex-col">
+              <div className="flex justify-center items-center mb-3">
+                <div className="relative w-32 h-10 lg:w-40 lg:h-12">
                   <Image
                     src={logo}
                     alt="NexLearn Logo"
@@ -137,9 +133,8 @@ export default function SignupPage() {
                 </div>
               </div>
 
-              {/* Illustration */}
               <div className="flex items-center justify-center">
-                <div className="relative w-40 h-40 lg:w-48 lg:h-48">
+                <div className="relative w-32 h-32 lg:w-40 lg:h-40">
                   <Image
                     src={loginIllustration}
                     alt="Learning Illustration"
@@ -150,27 +145,25 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* RIGHT — Signup Card (same width/feel as login white card) */}
             <div
               className="
                 bg-white rounded-2xl border border-[#D1D5DB] shadow-sm 
-                max-w-sm w-full max-h-[520px] overflow-y-auto 
+                max-w-sm w-full max-h-[440px] overflow-y-auto 
                 [scrollbar-width:none] [-ms-overflow-style:none] 
                 [&::-webkit-scrollbar]:hidden
               "
             >
-              <div className="p-5 sm:p-6 lg:p-6 flex flex-col h-full">
+              <div className="p-4 sm:p-5 lg:p-5 flex flex-col h-full">
                 <form onSubmit={handleSubmit} className="flex flex-col flex-1">
                   <div className="flex flex-col flex-1">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-3">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-2">
                       Add Your Details
                     </h2>
 
-                    {/* Profile picture placeholder - centered square */}
-                    <div className="mb-5 flex justify-center">
+                    <div className="mb-4 flex justify-center">
                       <div
                         onClick={handleProfileClick}
-                        className="w-28 h-28 border border-dashed border-[#CBD5E1] rounded-2xl 
+                        className="w-24 h-24 border border-dashed border-[#CBD5E1] rounded-2xl 
                                    flex flex-col items-center justify-center cursor-pointer 
                                    hover:bg-slate-50 transition overflow-hidden"
                       >
@@ -182,8 +175,8 @@ export default function SignupPage() {
                           />
                         ) : (
                           <>
-                            <div className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center mb-1">
-                              <span className="text-lg text-slate-500">+</span>
+                            <div className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center mb-1">
+                              <span className="text-base text-slate-500">+</span>
                             </div>
                             <p className="text-[11px] text-slate-500 text-center px-2">
                               Add Your Profile picture
@@ -200,8 +193,7 @@ export default function SignupPage() {
                       </div>
                     </div>
 
-                    {/* Name */}
-                    <div className="mb-3">
+                    <div className="mb-2">
                       <label className="block text-sm font-medium text-[#4B5563] mb-1">
                         Name<span className="text-red-500">*</span>
                       </label>
@@ -216,7 +208,7 @@ export default function SignupPage() {
                     </div>
 
                     {/* Email */}
-                    <div className="mb-3">
+                    <div className="mb-2">
                       <label className="block text-sm font-medium text-[#4B5563] mb-1">
                         Email<span className="text-red-500">*</span>
                       </label>
@@ -230,7 +222,6 @@ export default function SignupPage() {
                       />
                     </div>
 
-                    {/* Qualification */}
                     <div className="mb-1">
                       <label className="block text-sm font-medium text-[#4B5563] mb-1">
                         Your qualification<span className="text-red-500">*</span>
@@ -245,7 +236,6 @@ export default function SignupPage() {
                       />
                     </div>
 
-                    {/* Mobile info */}
                     {mobileFromQuery && (
                       <p className="mt-2 text-[11px] text-slate-500">
                         Mobile:{" "}
@@ -258,11 +248,10 @@ export default function SignupPage() {
                     )}
                   </div>
 
-                  {/* Submit Button – with bottom space */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-6 mb-1 w-full py-3 rounded-xl bg-[#0A0A0A] text-white text-sm font-medium hover:bg-black transition disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="mt-4 mb-1 cursor-pointer w-full py-2.5 rounded-xl bg-[#0A0A0A] text-white text-sm font-medium hover:bg-black transition disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Submitting..." : "Get Started"}
                   </button>

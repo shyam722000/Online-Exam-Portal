@@ -190,7 +190,7 @@ export default function LoginPage() {
                       Enter your phone number
                     </h2>
 
-                    <p className="text-sm sm:text-base text-[#1C3141] mb-4 sm:mb-5">
+                    <p className="text-sm sm:text-base text-[#1C3141] mb-4 sm:mb-4">
                       We use your mobile number to identify your account
                     </p>
 
