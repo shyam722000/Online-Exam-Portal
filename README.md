@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 NOVIINDUS Online Exam Portal
 
-## Getting Started
+A fully functional online examination system built using **Next.js (App Router)** and **Redux Toolkit**.  
+Includes authentication, protected routes, live question status tracking, countdown timer, and secure restrictions on refresh/back navigation.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👨‍🎓 Examination
+- Live MCQ test interface
+- Mark for Review / Answered / Not Answered status indicators
+- Timer with auto countdown ⏱
+- Comprehension paragraph view (modal)
+- Restricts:
+  - Page refresh (F5 / Ctrl+R)
+  - Closing tab without confirmation
+  - Back button navigation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔐 Authentication
+- Login & Signup pages (Email + Password)
+- Protected Routes using AuthGuard
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📊 Result System
+- Score summary page after submission
+- Auto calculate:
+  - Correct Questions
+  - Wrong Answers
+  - Not Attended count
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 13+ (App Router)** | Frontend UI + Routing |
+| **Redux Toolkit** | Global State Management |
+| **Tailwind CSS** | UI Styling |
+| **Custom REST APIs** | Questions & Answer Submission |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📂 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+app/
+├─ exam/
+│ └─ page.tsx # Main exam UI
+├─ login/
+│ └─ page.tsx # Login screen
+├─ signup/
+│ └─ page.tsx # Signup screen
+├─ result/
+│ └─ page.tsx # Result screen
+├─ protected/
+│ └─ layout.tsx # AuthGuard wrapper
+│
+├─ Providers.tsx # Redux Provider
+├─ layout.tsx # Global layout wrapper
+├─ globals.css # Global Tailwind styles
+│
+store/
+├─ store.ts # Redux store config
+├─ examSlice.ts # Exam state logic (timer + answers)
+└─ hooks.ts # Typed Redux hooks
+│
+lib/
+└─ api.js # API helpers (re usable api functions)
+│
+components/
+├─ Navbar.tsx
+├─ AuthGuard.tsx
+└─ HomeLayout.tsx
