@@ -135,14 +135,14 @@ export default function LoginPage() {
       <div className="absolute inset-0 bg-slate-950/75" />
 
       {/* Main Card */}
-      <div className="relative z-10 w-full max-w-5xl">
-        <div className="rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 p-3 sm:p-4">
-          <div className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-4">
+      <div className="relative z-10 w-full max-w-3xl mx-auto">
+        <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-2 sm:p-3">
+          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-3 items-center">
             {/* LEFT — Illustration Section (hidden on mobile) */}
-            <div className="hidden md:flex rounded-3xl md:rounded-l-3xl md:rounded-r-none px-8 lg:px-10 py-8 lg:py-10 flex-col">
+            <div className="hidden md:flex rounded-2xl md:rounded-l-2xl md:rounded-r-none px-5 lg:px-6 py-5 lg:py-6 flex-col">
               {/* Logo */}
-              <div className="flex justify-center items-center mb-6">
-                <div className="relative w-40 h-14 lg:w-52 lg:h-16">
+              <div className="flex justify-center items-center mb-4">
+                <div className="relative w-36 h-12 lg:w-44 lg:h-14">
                   <Image
                     src={logo}
                     alt="NexLearn Logo"
@@ -153,8 +153,8 @@ export default function LoginPage() {
               </div>
 
               {/* Illustration */}
-              <div className="flex-1 flex items-center justify-center">
-                <div className="relative w-56 h-56 lg:w-[20rem] lg:h-[20rem]">
+              <div className="flex items-center justify-center">
+                <div className="relative w-40 h-40 lg:w-48 lg:h-48">
                   <Image
                     src={loginIllustration}
                     alt="Learning Illustration"
@@ -166,10 +166,10 @@ export default function LoginPage() {
             </div>
 
             {/* RIGHT — White Card */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 flex flex-col border border-[#D1D5DB] shadow-sm max-w-md w-full mx-auto">
+            <div className="bg-white rounded-2xl p-5 sm:p-6 lg:p-6 flex flex-col border border-[#D1D5DB] shadow-sm max-w-sm w-full mx-auto">
               {/* Mobile Logo (only on small screens) */}
-              <div className="md:hidden flex justify-center items-center mb-6">
-                <div className="relative w-32 h-10">
+              <div className="md:hidden flex justify-center items-center mb-4">
+                <div className="relative w-28 h-9">
                   <Image
                     src={logodark}
                     alt="NexLearn Logo"
@@ -186,11 +186,11 @@ export default function LoginPage() {
                   className="flex flex-col flex-1"
                 >
                   <div className="flex flex-col flex-1">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-3">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-2">
                       Enter your phone number
                     </h2>
 
-                    <p className="text-sm sm:text-base text-[#1C3141] mb-6 sm:mb-8">
+                    <p className="text-sm sm:text-base text-[#1C3141] mb-4 sm:mb-5">
                       We use your mobile number to identify your account
                     </p>
 
@@ -203,7 +203,7 @@ export default function LoginPage() {
                         Phone number
                       </label>
 
-                        <div className="flex items-center gap-2 border border-[#CBD5E1] rounded-xl px-2 py-2.5 sm:py-3 bg-white">
+                      <div className="flex items-center gap-2 border border-[#CBD5E1] rounded-xl px-2 py-2.5 sm:py-3 bg-white">
                         {/* Country code select */}
                         <select
                           value={countryCode}
@@ -237,7 +237,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Terms */}
-                    <p className="mt-4 text-xs sm:text-sm text-[#6B7280]">
+                    <p className="mt-3 text-xs sm:text-sm text-[#6B7280]">
                       By tapping Get started, you agree to the{" "}
                       <a
                         href="#"
@@ -253,7 +253,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={isSendingOtp}
-                    className="mt-8 sm:mt-10 w-full py-3 rounded-xl bg-[#0A0A0A] text-white text-sm sm:text-base font-medium hover:bg-black transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="mt-6 sm:mt-6 w-full py-3 rounded-xl bg-[#0A0A0A] text-white text-sm sm:text-base font-medium hover:bg-black transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSendingOtp ? "Sending..." : "Get Started"}
                   </button>
@@ -267,16 +267,16 @@ export default function LoginPage() {
                   className="flex flex-col flex-1"
                 >
                   <div className="flex flex-col flex-1">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-3">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-2">
                       Enter the code we texted you
                     </h2>
 
-                    <p className="text-sm sm:text-base text-[#4B5563] mb-6 sm:mb-8">
+                    <p className="text-sm sm:text-base text-[#4B5563] mb-4 sm:mb-5">
                       We’ve sent an SMS to {formattedPhone}
                     </p>
 
                     {/* OTP Input */}
-                    <div className="w-full mb-4">
+                    <div className="w-full mb-3">
                       <label
                         htmlFor="otp"
                         className="block text-sm font-medium text-[#4B5563] mb-1"
@@ -302,7 +302,7 @@ export default function LoginPage() {
                       )}
                     </div>
 
-                    <p className="text-xs text-[#6B7280] mb-2">
+                    <p className="text-xs text-[#6B7280] mb-1">
                       Your 6 digit code is on its way. This can sometimes take a
                       few moments to arrive.
                     </p>
@@ -320,7 +320,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={isVerifyingOtp}
-                    className="mt-8 sm:mt-10 w-full py-3 rounded-xl bg-[#0A0A0A] text-white text-sm sm:text-base font-medium hover:bg-black transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="mt-6 sm:mt-6 w-full py-3 rounded-xl bg-[#0A0A0A] text-white text-sm sm:text-base font-medium hover:bg-black transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isVerifyingOtp ? "Verifying..." : "Get Started"}
                   </button>

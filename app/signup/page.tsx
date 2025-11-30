@@ -108,7 +108,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
       {/* Background */}
       <Image
         src={loginBG}
@@ -117,16 +117,17 @@ export default function SignupPage() {
         className="object-cover"
         priority
       />
+      <div className="absolute inset-0 bg-slate-950/75" />
 
       {/* Main Card */}
-      <div className="relative z-10 w-full max-w-5xl">
-        <div className="rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 p-3">
-          <div className="grid md:grid-cols-[1.15fr_1fr] gap-3">
-            {/* LEFT — Illustration Section (same as login) */}
-            <div className="rounded-3xl md:rounded-l-3xl md:rounded-r-none px-10 py-10 flex flex-col">
+      <div className="relative z-10 w-full max-w-3xl mx-auto">
+        <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-2 sm:p-3">
+          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-3 items-center">
+            {/* LEFT — Illustration Section (same style as login) */}
+            <div className="hidden md:flex rounded-2xl md:rounded-l-2xl md:rounded-r-none px-5 lg:px-6 py-5 lg:py-6 flex-col">
               {/* Logo - centered */}
-              <div className="flex justify-center items-center mb-6">
-                <div className="relative w-52 h-16">
+              <div className="flex justify-center items-center mb-4">
+                <div className="relative w-36 h-12 lg:w-44 lg:h-14">
                   <Image
                     src={logo}
                     alt="NexLearn Logo"
@@ -137,8 +138,8 @@ export default function SignupPage() {
               </div>
 
               {/* Illustration */}
-              <div className="flex-1 flex items-center justify-center">
-                <div className="relative w-72 h-72 md:w-[20rem] md:h-[20rem]">
+              <div className="flex items-center justify-center">
+                <div className="relative w-40 h-40 lg:w-48 lg:h-48">
                   <Image
                     src={loginIllustration}
                     alt="Learning Illustration"
@@ -149,27 +150,27 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* RIGHT — Signup Card (scrollable, scrollbar hidden) */}
+            {/* RIGHT — Signup Card (same width/feel as login white card) */}
             <div
               className="
-                bg-white rounded-3xl border border-[#D1D5DB] shadow-sm 
-                max-w-md w-full max-h-[520px] overflow-y-auto 
+                bg-white rounded-2xl border border-[#D1D5DB] shadow-sm 
+                max-w-sm w-full max-h-[520px] overflow-y-auto 
                 [scrollbar-width:none] [-ms-overflow-style:none] 
                 [&::-webkit-scrollbar]:hidden
               "
             >
-              <div className="p-8 pb-10 flex flex-col h-full">
+              <div className="p-5 sm:p-6 lg:p-6 flex flex-col h-full">
                 <form onSubmit={handleSubmit} className="flex flex-col flex-1">
                   <div className="flex flex-col flex-1">
-                    <h2 className="text-[22px] font-semibold text-[#1C3141] mb-4">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-[#1C3141] mb-3">
                       Add Your Details
                     </h2>
 
                     {/* Profile picture placeholder - centered square */}
-                    <div className="mb-6 flex justify-center">
+                    <div className="mb-5 flex justify-center">
                       <div
                         onClick={handleProfileClick}
-                        className="w-32 h-32 border border-dashed border-[#CBD5E1] rounded-2xl 
+                        className="w-28 h-28 border border-dashed border-[#CBD5E1] rounded-2xl 
                                    flex flex-col items-center justify-center cursor-pointer 
                                    hover:bg-slate-50 transition overflow-hidden"
                       >
